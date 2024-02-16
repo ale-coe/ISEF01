@@ -16,6 +16,3 @@
 - Container starten: docker run -d -p 80:80 --name isfe_c isfe:latest
 - Backend in Container starten: docker exec -d isfe_c node dist/main.js
 - Betreten des Containers: docker exec -ti isfe_c bash
-
-
-mkcert localhost 127.0.0.1 ::1
