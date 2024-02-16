@@ -10,8 +10,10 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update
 RUN apt install nodejs -y
 
-COPY FE/dist/fe /var/www/html/
-COPY default /etc/nginx/sites-available/
+COPY FE/dist/fe /var/www/html
+COPY default /etc/nginx/sites-available
+COPY ssl/cert.pem /etc/nginx
+COPY ssl/key.pem /etc/nginx
 
 RUN mkdir -p /app/dist
 WORKDIR /app
