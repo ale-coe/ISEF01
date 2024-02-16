@@ -1,0 +1,78 @@
+<div>
+  <h2>Aktive Quizzes</h2>
+  <div class="game-cards">
+    <mat-card *ngFor="let game of ongoingGames">
+      <mat-card-title>{{
+        game.isCoop ? "Kooperatives Quiz" : "Kompetitives Quiz"
+      }}</mat-card-title>
+      <mat-card-content>
+        <div class="score">
+          <p>
+            <span *ngIf="!game.isCoop"
+              >({{
+                game.gameUser[0].user.mail === ownName
+                  ? "Du"
+                  : game.gameUser[0].user.mail
+              }})</span
+            >
+            {{ game.gameUser[0].correct }} : {{ game.gameUser[1].incorrect }}
+            <span *ngIf="!game.isCoop"
+              >({{
+                game.gameUser[1].user.mail === ownName
+                  ? "Du"
+                  : game.gameUser[1].user.mail
+              }})</span
+            >
+          </p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          [disabled]=""
+          mat-mini-fab
+          color="primary"
+          (click)="continueGame(game.id, game.isCoop)"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div>
+  <h2>Abgeschlossene Quizzes</h2>
+  <div class="game-cards">
+    <mat-card *ngFor="let game of doneGames">
+      <mat-card-title>{{
+        game.isCoop ? "Kooperatives Quiz" : "Kompetitives Quiz"
+      }}</mat-card-title>
+      <mat-card-content>
+        <div class="score">
+          <p>
+            ({{
+              game.gameUser[0].user.mail === ownName
+                ? "Du"
+                : game.gameUser[0].user.mail
+            }}) {{ game.gameUser[0].correct }} :
+            {{ game.gameUser[1].incorrect }} ({{
+              game.gameUser[1].user.mail === ownName
+                ? "Du"
+                : game.gameUser[1].user.mail
+            }})
+          </p>
+          <p>{{ game | result : ownName : game.isCoop }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<button
+  class="start-game-btn"
+  mat-fab
+  color="primary"
+  (click)="openGameDialog(0)"
+>
+  <mat-icon><span> sports_esports </span></mat-icon>
+</button>

@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-content [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Frage</mat-label>
+      <input formControlName="questionFormControl" matInput />
+    </mat-form-field>
+
+    <mat-radio-group formControlName="correctAnswerFormControl">
+      <ng-container formArrayName="answerFormArray">
+        <ng-container
+          *ngFor="let answer of answerFormArray.controls; index as i"
+          [formGroupName]="i"
+        >
+          <mat-radio-button [value]="i">
+            <mat-form-field class="answer">
+              <mat-label>Antwort</mat-label>
+              <input formControlName="answerFormControl" matInput />
+            </mat-form-field>
+            <mat-form-field class="reason">
+              <mat-label>Begründung</mat-label>
+              <input
+                formControlName="reasonFormControl"
+                matInput
+              /> </mat-form-field
+          ></mat-radio-button>
+        </ng-container>
+      </ng-container>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button
+      [disabled]="!question || !question.inEdit"
+      mat-mini-fab
+      color="warn"
+      (click)="deleteQuestion()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      [disabled]="!question || !!question.inEdit"
+      mat-mini-fab
+      color="primary"
+      (click)="putInEdit()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      [disabled]="formGroup.status !== 'VALID'"
+      mat-mini-fab
+      color="primary"
+      (click)="deleteGateSave()"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

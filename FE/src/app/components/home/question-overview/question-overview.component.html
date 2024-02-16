@@ -1,0 +1,15 @@
+<mat-paginator
+  [disabled]="paginatorDisabled"
+  [length]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10]"
+>
+</mat-paginator>
+
+<div class="questions">
+  <app-question
+    *ngFor="let question of questions"
+    [question]="question"
+    (putInEdit$)="putInEdit($event)"
+  ></app-question>
+</div>

@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content>
+    <h1 class="title">IU-Quizapp</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="login()">
+      <div class="login-inputs">
+        <mat-form-field class="example-form-field">
+          <mat-label>Benutzername</mat-label>
+          <input formControlName="username" matInput type="text" />
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput type="password" />
+        </mat-form-field>
+      </div>
+
+      <button
+        [disabled]="formGroup.status !== 'VALID' || loggingIn"
+        class="login-btn"
+        mat-raised-button
+        color="primary"
+      >
+        Login
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

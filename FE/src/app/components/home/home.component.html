@@ -1,0 +1,47 @@
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer #drawer mode="over">
+    <button
+      mat-menu-item
+      routerLink="main-screen"
+      (click)="naviagate('Startseite')"
+    >
+      <mat-icon>home</mat-icon>
+      <span>Startseite</span>
+    </button>
+    <button
+      mat-menu-item
+      routerLink="question-overview"
+      (click)="naviagate('Fragenübersicht')"
+    >
+      <mat-icon>list</mat-icon>
+      <span>Fragenübersicht</span>
+    </button>
+    <button
+      mat-menu-item
+      routerLink="question-edit"
+      (click)="naviagate('Frageneditor')"
+    >
+      <mat-icon>edit</mat-icon>
+      <span>Frageneditor</span>
+    </button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="title">{{ title }}</span>
+      <span class="spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

@@ -1,0 +1,20 @@
+:host {
+  .mat-mdc-card-content {
+    display: flex;
+    flex-direction: column;
+
+    .mat-mdc-radio-group {
+      display: flex;
+      flex-direction: column;
+
+      .reason {
+        margin-left: 25px;
+      }
+    }
+  }
+
+  .mat-mdc-card-actions {
+    display: flex;
+    gap: 20px;
+  }
+}

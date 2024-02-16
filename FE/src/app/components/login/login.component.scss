@@ -1,0 +1,26 @@
+:host {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .mat-mdc-card-content {
+    padding: 50px;
+
+    .login-inputs {
+      display: flex;
+      justify-content: stretch;
+      flex-direction: column;
+    }
+
+    .login-btn {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+}

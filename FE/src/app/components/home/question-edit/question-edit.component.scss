@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+  align-items: flex-start;
+
+  gap: 40px;
+  height: 0px;
+  flex: 1 1 0%;
+  overflow: auto;
+
+  .mat-mdc-paginator {
+    background-color: #fafafa;
+  }
+
+  .questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+}

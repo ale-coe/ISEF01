@@ -1,0 +1,86 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>{{ title }}</h2>
+  <button mat-icon-button [mat-dialog-close]>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content>
+  <ng-container *ngIf="!playerLeft; else playerLeftErrorMessage">
+    <ng-container *ngIf="gameId < 0 && !showWaitMessage">
+      <p class="game-mode-question">Welchen Modus möchtest du spielen?</p>
+      <div class="btns">
+        <button
+          [disabled]="selectBtnsDisabled"
+          mat-raised-button
+          color="primary"
+          (click)="startCompGame()"
+        >
+          Kompetitiv
+        </button>
+        <button
+          [disabled]="selectBtnsDisabled"
+          mat-raised-button
+          color="primary"
+          (click)="waitForCoopGame()"
+        >
+          Kooperativ
+        </button>
+      </div>
+    </ng-container>
+    <p class="waiting-message" *ngIf="showWaitMessage">Warten auf Mitspieler</p>
+    <div class="game-area" *ngIf="currentQuestion">
+      <div class="questions">
+        <p>{{ currentQuestion.question }}</p>
+        <mat-radio-group [formControl]="answerFormControl">
+          <mat-radio-button
+            *ngFor="let answer of currentQuestion.answers"
+            [value]="answer.answer"
+            >{{ answer.answer }}</mat-radio-button
+          >
+        </mat-radio-group>
+        <button
+          *ngIf="!showNextBtn"
+          (click)="sendAnswer()"
+          [disabled]="answerFormControl.status !== 'VALID'"
+          mat-fab
+          color="primary"
+        >
+          <mat-icon><span> check </span></mat-icon>
+        </button>
+        <button
+          *ngIf="showNextBtn"
+          mat-fab
+          color="primary"
+          (click)="getCurrentQuestion()"
+        >
+          <mat-icon><span> chevron_right </span></mat-icon>
+        </button>
+
+        <p>{{ result }}</p>
+        <p>{{ reason }}</p>
+      </div>
+      <div *ngIf="isCoop" class="chat">
+        <div class="messages">
+          <ng-container *ngFor="let message of messages">
+            <p class="message" [ngClass]="message.own ? 'own' : 'not-own'">
+              {{ message.message }}
+            </p>
+            <p class="own name-tag" *ngIf="message.own">Du</p>
+          </ng-container>
+        </div>
+        <form [formGroup]="formgroup" (ngSubmit)="sendMessage()">
+          <mat-form-field>
+            <mat-label>Nachricht</mat-label>
+            <input matInput formControlName="messageFormControl" />
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<ng-template #playerLeftErrorMessage>
+  <p class="player-left-message">
+    Ein Spieler hat das Spiel verlassen. Das Spiel wurde unterbrochen.
+  </p>
+</ng-template>
