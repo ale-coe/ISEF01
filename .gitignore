@@ -2,4 +2,6 @@ node_modules
 .angular
 dist
 *.db
+*.db-shm
+*.db-wal
 *.pem
