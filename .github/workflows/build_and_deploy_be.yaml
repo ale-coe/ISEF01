@@ -22,7 +22,7 @@ jobs:
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         port: 22
-        source: "BE/src/"
+        source: "BE/*"
         target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
