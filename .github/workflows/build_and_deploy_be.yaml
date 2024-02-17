@@ -21,7 +21,7 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        source: "BE/src/*,BE/package.json,./.env.prod"
+        source: "BE/src/*,BE/package.json,BE/tsconfig.json,BE/tsconfig.build.json,BE/.env.prod"
         target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
