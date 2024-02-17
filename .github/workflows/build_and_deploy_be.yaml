@@ -13,7 +13,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '18' # Set this to your project's Node.js version
+        node-version: '18'
   
     - name: Deploy to Server
       uses: appleboy/scp-action@master
@@ -30,4 +30,4 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        script: cd app/BE && npm install && npm run build && pm2 restart all
+        script: cd app/BE && npm install && npm run build && mv .env.prod .env && pm2 restart all
