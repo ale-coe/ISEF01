@@ -15,6 +15,7 @@ import { GameModule } from './game/game.module';
         SUPER_SECRET: Joi.string().required(),
         PREFIX: Joi.string().required(),
         DEVELOPMENT: Joi.boolean().required(),
+        DB_PATH: Joi.boolean().required(),
       }),
     }),
     DatabaseModule,
