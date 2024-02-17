@@ -30,8 +30,8 @@ jobs:
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         port: 22
-        source: "BE/dist/"
-        target: "/home/deployer/app"
+        source: "BE/dist/BE/"
+        target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
       uses: appleboy/ssh-action@master
