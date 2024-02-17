@@ -13,7 +13,7 @@ import { GameUserEntity } from './entities/game-user.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database:
-        process.env.DEVELOPMET === 'true' ? 'localDb.db' : '../localDb.db',
+        process.env.DEVELOPMET === 'true' ? 'localDb.db' : '../../localDb.db',
       enableWAL: true,
       entities: [
         AnswerEntity,
