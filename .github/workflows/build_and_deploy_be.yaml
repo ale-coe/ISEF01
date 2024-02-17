@@ -30,4 +30,4 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        script: cd app/BE && npm install && pm2 restart all
+        script: cd app/BE && npm install &&npm run build && pm2 restart all
