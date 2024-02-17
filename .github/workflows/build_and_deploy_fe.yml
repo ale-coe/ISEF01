@@ -40,5 +40,5 @@ jobs:
         REMOTE_HOST: ${{ secrets.DEPLOY_SERVER }}
         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
         ARGS: "-avz --delete"
-        SOURCE: "FE/dist"
+        SOURCE: "FE/dist/fe/"
         TARGET: "/var/www/html"
