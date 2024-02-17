@@ -20,20 +20,22 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: FE
 
     - name: Build
       run: npm run build
+      working-directory: FE
 
     - name: Archive build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: built-app
-        path: dist
+        path: FE/dist
 
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
         ARGS: "-avz --delete"
-        SOURCE: "path/to/your/build/directory/"
+        SOURCE: "FE/dist"
         TARGET: "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:/var/www/html"
