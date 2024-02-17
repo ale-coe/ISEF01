@@ -14,15 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '18' # Set this to your project's Node.js version
-
-    - name: Install Dependencies
-      run: npm install
-      working-directory: BE
-
-    - name: Build
-      run: npm run build
-      working-directory: BE
-
+  
     - name: Deploy to Server
       uses: appleboy/scp-action@master
       with:
@@ -30,7 +22,7 @@ jobs:
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
         port: 22
-        source: "BE/dist/BE/"
+        source: "BE/src/"
         target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
