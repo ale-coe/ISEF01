@@ -21,7 +21,7 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        source: "BE/src/*,BE/package.json,BE/tsconfig.json,BE/tsconfig.build.json,BE/.env.prod"
+        source: "BE/src/*,BE/package.json,BE/tsconfig.json,BE/tsconfig.build.json,BE/.env.prod,BE/init_db.js"
         target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
@@ -30,4 +30,4 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        script: cd app/BE && npm install &&npm run build && pm2 restart all
+        script: cd app/BE && npm install && npm run build && pm2 restart all
