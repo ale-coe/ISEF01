@@ -10,12 +10,12 @@ import { GameModule } from './game/game.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: (() => {
-        const pathToEnv = join(__dirname, '..', '.env');
-        console.log(pathToEnv);
-        return pathToEnv;
-      })(),
-      validationSchema: Joi.object({ SUPER_SECRET: Joi.string().required() }),
+      envFilePath: join(__dirname, '..', '.env'),
+      validationSchema: Joi.object({
+        SUPER_SECRET: Joi.string().required(),
+        PREFIX: Joi.string().required(),
+        DEVELOPMENT: Joi.boolean().required(),
+      }),
     }),
     DatabaseModule,
     AuthModule,

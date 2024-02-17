@@ -2,43 +2,40 @@ name: Build and Deploy FE
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'  # Specify your Node.js version here
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18" # Specify your Node.js version here
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: FE
+      - name: Install dependencies
+        run: npm install
+        working-directory: FE
 
-    - name: Build
-      run: npm run build
-      working-directory: FE
+      - name: Build
+        run: npm run build
+        working-directory: FE
 
-    - name: Archive build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: built-app
-        path: FE/dist
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: built-app
+          path: FE/dist
 
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-        REMOTE_HOST: ${{ secrets.DEPLOY_SERVER }}
-        REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-        ARGS: "-avz --delete"
-        SOURCE: "FE/dist/fe/"
-        TARGET: "/var/www/html"
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          REMOTE_HOST: ${{ secrets.DEPLOY_SERVER }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+          ARGS: "-avz --delete"
+          SOURCE: "FE/dist/fe/"
+          TARGET: "/var/www/html"
