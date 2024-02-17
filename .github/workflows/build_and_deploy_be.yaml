@@ -21,8 +21,7 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        port: 22
-        source: "BE/src/*,BE/package.json,.env.prod"
+        source: "BE/src/*,BE/package.json,./.env.prod"
         target: "/home/${{ secrets.DEPLOY_USER }}/app"
 
     - name: Restart the application using PM2
@@ -31,5 +30,4 @@ jobs:
         host: ${{ secrets.DEPLOY_SERVER }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        port: 22
-        script: pm2 restart all
+        script: cd app/BE && npm install && pm2 restart all
