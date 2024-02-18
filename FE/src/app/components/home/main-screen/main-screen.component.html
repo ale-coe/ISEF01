@@ -6,32 +6,10 @@
         game.isCoop ? "Kooperatives Quiz" : "Kompetitives Quiz"
       }}</mat-card-title>
       <mat-card-content>
-        <div class="score">
-          <p>
-            <span *ngIf="!game.isCoop"
-              >({{
-                game.gameUser[0].user.mail === ownName
-                  ? "Du"
-                  : game.gameUser[0].user.mail
-              }})</span
-            >
-            <span class="correct">{{ game.gameUser[0].correct }} </span>:
-            <span [ngClass]="game.isCoop ? 'incorrect' : 'correct'">
-              {{
-                game.isCoop
-                  ? game.gameUser[0].incorrect
-                  : game.gameUser[1].correct
-              }}</span
-            >
-            <span *ngIf="!game.isCoop"
-              >({{
-                game.gameUser[1].user.mail === ownName
-                  ? "Du"
-                  : game.gameUser[1].user.mail
-              }})</span
-            >
-          </p>
-        </div>
+        <ng-container
+          [ngTemplateOutlet]="game.isCoop ? coop : comp"
+          [ngTemplateOutletContext]="{ $implicit: game }"
+        ></ng-container>
       </mat-card-content>
       <mat-card-actions align="end">
         <button
@@ -55,31 +33,11 @@
         game.isCoop ? "Kooperatives Quiz" : "Kompetitives Quiz"
       }}</mat-card-title>
       <mat-card-content>
-        <div class="score">
-          <p>
-            <span *ngIf="!game.isCoop"
-              >({{
-                game.gameUser[0].user.mail === ownName
-                  ? "Du"
-                  : game.gameUser[0].user.mail
-              }})
-            </span>
-            <span class="correct">{{ game.gameUser[0].correct }}</span> :
-            <span [ngClass]="game.isCoop ? 'incorrect' : 'correct'">{{
-              game.isCoop
-                ? game.gameUser[0].incorrect
-                : game.gameUser[1].correct
-            }}</span>
-            <span *ngIf="!game.isCoop"
-              >({{
-                game.gameUser[1].user.mail === ownName
-                  ? "Du"
-                  : game.gameUser[1].user.mail
-              }})</span
-            >
-          </p>
-          <p>{{ game | result : ownName : game.isCoop }}</p>
-        </div>
+        <ng-container
+          [ngTemplateOutlet]="game.isCoop ? coop : comp"
+          [ngTemplateOutletContext]="{ $implicit: game }"
+        ></ng-container>
+        <p>{{ game | result : ownName : game.isCoop }}</p>
       </mat-card-content>
     </mat-card>
   </div>
@@ -93,3 +51,22 @@
 >
   <mat-icon><span> sports_esports </span></mat-icon>
 </button>
+
+<ng-template #coop let-game>
+  <div class="score">
+    <p>
+      <span class="correct">{{ game.gameUser[0].correct }} </span> /
+      <span class="incorrect">{{ game.gameUser[0].incorrect }}</span>
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #comp let-game>
+  <p *ngFor="let gameUser of game.gameUser">
+    <span class="player-name"
+      >{{ gameUser.user.mail === ownName ? "Du" : gameUser.user.mail }}:</span
+    >
+    <span class="correct">{{ gameUser.correct }} </span> /
+    <span class="incorrect">{{ gameUser.incorrect }} </span>
+  </p>
+</ng-template>
