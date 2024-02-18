@@ -14,7 +14,7 @@ export class LoginComponent {
     username: new FormControl('test1@mail.de', {
       validators: [Validators.required],
     }),
-    password: new FormControl('123', { validators: [Validators.required] }),
+    password: new FormControl('', { validators: [Validators.required] }),
   });
 
   constructor(
