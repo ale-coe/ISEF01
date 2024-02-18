@@ -18,7 +18,7 @@ import { GameModule } from './game/game.module';
         DB_PATH: Joi.string().required(),
       }),
     }),
-    DatabaseModule,
+    DatabaseModule.register(),
     AuthModule,
     GameModule,
   ],
