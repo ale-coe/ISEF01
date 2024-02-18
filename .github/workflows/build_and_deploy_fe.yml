@@ -38,13 +38,4 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           source: "FE/dist/fe/"
           target: "/var/www/html"
-          strip_components: 2
-
-      # - name: SSH and Copy Files
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.DEPLOY_SERVER }}
-      #     username: ${{ secrets.DEPLOY_USER }}
-      #     key: ${{ secrets.DEPLOY_KEY }}
-      #     script: |
-      #       cp -R /var/www/html/FE/dist/fe/. /var/www/html/
+          strip_components: 3
