@@ -9,7 +9,7 @@ export class ResultPipe implements PipeTransform {
       0
     );
 
-    if (answeredQuestions < 16) {
+    if (answeredQuestions < 8) {
       return 'Das Quiz läuft noch.';
     } else if (isCoop) {
       return 'Ihr habt beide gewonnen.';
