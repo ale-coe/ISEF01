@@ -15,12 +15,14 @@
                   : game.gameUser[0].user.mail
               }})</span
             >
-            {{ game.gameUser[0].correct }} :
-            {{
-              game.isCoop
-                ? game.gameUser[0].incorrect
-                : game.gameUser[1].correct
-            }}
+            <span class="correct">{{ game.gameUser[0].correct }} </span>:
+            <span [ngClass]="game.isCoop ? 'incorrect' : 'correct'">
+              {{
+                game.isCoop
+                  ? game.gameUser[0].incorrect
+                  : game.gameUser[1].correct
+              }}</span
+            >
             <span *ngIf="!game.isCoop"
               >({{
                 game.gameUser[1].user.mail === ownName
@@ -55,16 +57,26 @@
       <mat-card-content>
         <div class="score">
           <p>
-            ({{
-              game.gameUser[0].user.mail === ownName
-                ? "Du"
-                : game.gameUser[0].user.mail
-            }}) {{ game.gameUser[0].correct }} :
-            {{ game.gameUser[1].incorrect }} ({{
-              game.gameUser[1].user.mail === ownName
-                ? "Du"
-                : game.gameUser[1].user.mail
-            }})
+            <span *ngIf="!game.isCoop"
+              >({{
+                game.gameUser[0].user.mail === ownName
+                  ? "Du"
+                  : game.gameUser[0].user.mail
+              }})
+            </span>
+            <span class="correct">{{ game.gameUser[0].correct }}</span> :
+            <span [ngClass]="game.isCoop ? 'incorrect' : 'correct'">{{
+              game.isCoop
+                ? game.gameUser[0].incorrect
+                : game.gameUser[1].correct
+            }}</span>
+            <span *ngIf="!game.isCoop"
+              >({{
+                game.gameUser[1].user.mail === ownName
+                  ? "Du"
+                  : game.gameUser[1].user.mail
+              }})</span
+            >
           </p>
           <p>{{ game | result : ownName : game.isCoop }}</p>
         </div>
