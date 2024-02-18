@@ -12,7 +12,12 @@ import { GameUserEntity } from './entities/game-user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: process.env.DB_PATH,
+      database: (() => {
+        console.log(process.env.DB_PATH);
+        console.log(__dirname);
+        console.log(__filename);
+        return process.env.DB_PATH;
+      })(),
       enableWAL: true,
       entities: [
         AnswerEntity,
