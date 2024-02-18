@@ -15,7 +15,12 @@
                   : game.gameUser[0].user.mail
               }})</span
             >
-            {{ game.gameUser[0].correct }} : {{ game.gameUser[1].correct }}
+            {{ game.gameUser[0].correct }} :
+            {{
+              game.isCoop
+                ? game.gameUser[0].incorrect
+                : game.gameUser[1].correct
+            }}
             <span *ngIf="!game.isCoop"
               >({{
                 game.gameUser[1].user.mail === ownName
