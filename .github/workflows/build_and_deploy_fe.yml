@@ -30,12 +30,12 @@ jobs:
           name: built-app
           path: FE/dist
 
-      - name: Deploy to Server
-        uses: appleboy/scp-action@master
+      - name: SSH and Copy Files
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DEPLOY_SERVER }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "FE/dist/fe/*"
-          target: "/var/www/html"
-          strip_components: 1
+          script: |
+            cp -R FE/dist/fe/. /var/www/html/
+
