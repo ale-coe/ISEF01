@@ -8,26 +8,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '18'
-  
-    - name: Deploy to Server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.DEPLOY_SERVER }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        source: "BE/src/*,BE/package.json,BE/tsconfig.json,BE/tsconfig.build.json,BE/.env.prod,BE/init_db.js"
-        target: "/home/${{ secrets.DEPLOY_USER }}/app"
+      - name: Replace string in file
+        run: |
+          sed -i 's/_SUPER_SECRET_/${{ secrets.SUPER_SECRET }}/' BE/.env.prod
+        shell: bash
 
-    - name: Restart the application using PM2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DEPLOY_SERVER }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        script: cd app/BE && npm install && npm run build && mv .env.prod .env && pm2 restart all
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "18"
+
+      - name: Deploy to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          source: "BE/src/*,BE/package.json,BE/tsconfig.json,BE/tsconfig.build.json,BE/.env.prod,BE/init_db.js"
+          target: "/home/${{ secrets.DEPLOY_USER }}/app"
+
+      - name: Restart the application using PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: cd app/BE && npm install && npm run build && mv .env.prod .env && pm2 restart all
