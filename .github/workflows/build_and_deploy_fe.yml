@@ -36,5 +36,5 @@ jobs:
           host: ${{ secrets.DEPLOY_SERVER }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "BE/dist/fe/*"
+          source: "FE/dist/fe/*"
           target: "/var/www/html"
