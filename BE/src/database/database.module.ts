@@ -16,13 +16,7 @@ export class DatabaseModule {
       imports: [
         TypeOrmModule.forRoot({
           type: 'sqlite',
-          database: (() => {
-            console.log('process.env.DB_PATH', process.env.DB_PATH);
-            console.log('process.env', process.env);
-            console.log('__dirname', __dirname);
-            console.log('__filename', __filename);
-            return process.env.DB_PATH;
-          })(),
+          database: process.env.DB_PATH,
           enableWAL: true,
           entities: [
             AnswerEntity,
