@@ -29,7 +29,7 @@ export class QuestionsService {
       where: { inEdit: query.inEdit },
       take: query.limit,
       skip: query.offset,
-      relations: { answers: { reasonWrongAnswer: true } },
+      relations: { answers: true },
     });
   }
 

@@ -210,7 +210,7 @@ export class GameDialogComponent implements OnInit, OnDestroy {
 
     if (correctAnswer) {
       this.result = `Das war falsch, die korrekte Antwort lautet ${correctAnswer}.`;
-      this.reason = `Begründung: ${reason || '-'}`;
+      this.reason = reason ? `Begründung: ${reason}` : '';
     } else {
       this.result = 'Das war korrekt!';
     }

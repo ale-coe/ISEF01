@@ -1,27 +1,18 @@
-import { IsNumber, IsString, IsIn, ValidateNested } from 'class-validator';
-import { ReasonWrongAnswerDto } from './reason-wrong-answer.dto';
-import { Type } from 'class-transformer';
+import { IsIn, IsNumber, IsString } from 'class-validator';
 
-abstract class BaseAnswerDto {
+export class PostAnswerDto {
   @IsString()
   answer: string;
 
   @IsNumber()
   @IsIn([0, 1])
   isCorrect: number;
+
+  @IsString()
+  reasonWrong: string;
 }
 
-export class UpdateAnswerDto extends BaseAnswerDto {
+export class UpdateAnswerDto extends PostAnswerDto {
   @IsNumber()
   id: number;
-
-  @Type(() => ReasonWrongAnswerDto)
-  @ValidateNested()
-  reasonWrongAnswer: ReasonWrongAnswerDto;
-}
-
-export class PostAnswerDto extends BaseAnswerDto {
-  @Type(() => ReasonWrongAnswerDto)
-  @ValidateNested()
-  reasonWrongAnswer: ReasonWrongAnswerDto;
 }

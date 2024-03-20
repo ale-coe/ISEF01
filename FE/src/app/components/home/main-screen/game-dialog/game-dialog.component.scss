@@ -44,6 +44,11 @@
 
       .questions {
         text-align: center;
+
+        .mat-mdc-radio-group {
+          display: flex;
+          flex-direction: column;
+        }
       }
 
       .chat {
@@ -71,11 +76,6 @@
           }
         }
       }
-    }
-
-    .mat-mdc-radio-group {
-      display: flex;
-      flex-direction: column;
     }
 
     .mat-mdc-fab {
