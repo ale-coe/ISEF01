@@ -2,16 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-export interface IReasonWrongAnswer {
-  id?: number;
-  reason: string;
-}
-
 export interface IAnswer {
   answer: string;
   id?: number;
   isCorrect: number;
-  reasonWrongAnswer: IReasonWrongAnswer | null;
+  reasonWrong: string;
 }
 
 export interface IQuestion {

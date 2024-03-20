@@ -1,7 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
-import { ReasonWrongAnswerEntity } from './entities/reason-wrong-answer.entity';
 import { QuestionEntity } from './entities/question.entity';
 import { AnswerEntity } from './entities/answer.entity';
 import { GameQuestionEntity } from './entities/game-question.entity';
@@ -23,7 +22,6 @@ export class DatabaseModule {
             GameQuestionEntity,
             GameEntity,
             QuestionEntity,
-            ReasonWrongAnswerEntity,
             GameUserEntity,
             UserEntity,
           ],

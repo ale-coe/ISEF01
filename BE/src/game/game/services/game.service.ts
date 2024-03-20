@@ -71,7 +71,7 @@ export class GameService {
           currentIndex === MAX_QUESTION_INDEX,
           answer.answer,
           question.answers.find((a) => !!a.isCorrect).answer,
-          givenAnswer.reasonWrongAnswer?.reason || '',
+          givenAnswer.reasonWrong || '',
         ];
   }
 
@@ -185,7 +185,7 @@ export class GameService {
     const currentIndex = await this.getCurrentIndex(gameId, userId);
 
     const gameQuestion = await this.gameQuestionRepo.find({
-      relations: { question: { answers: { reasonWrongAnswer: checkAnswer } } },
+      relations: { question: { answers: true } },
       where: { gameId },
       order: { id: 'ASC' },
       take: 1,

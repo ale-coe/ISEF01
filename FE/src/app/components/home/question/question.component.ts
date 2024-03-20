@@ -116,7 +116,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
               { validators: [Validators.required] }
             ),
             reasonFormControl: new FormControl({
-              value: answer.reasonWrongAnswer?.reason || '',
+              value: answer.reasonWrong || '',
               disabled: !!answer.isCorrect,
             }),
           })
@@ -153,9 +153,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       answers: (value.answerFormArray as Array<any>).map((_e, i) => ({
         answer: value.answerFormArray[i].answerFormControl,
         isCorrect: i === value.correctAnswerFormControl ? 1 : 0,
-        reasonWrongAnswer: {
-          reason: value.answerFormArray[i].reasonFormControl || '',
-        },
+        reasonWrong: value.answerFormArray[i].reasonFormControl || '',
       })),
     };
 
@@ -173,14 +171,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
       id: question.id,
       question: value.questionFormControl,
       inEdit: EInEditState.NOT_IN_EDIT,
-      answers: question.answers.map(({ id, reasonWrongAnswer }, i) => ({
+      answers: question.answers.map(({ id }, i) => ({
         id: id as number,
         answer: value.answerFormArray[i].answerFormControl,
         isCorrect: i === value.correctAnswerFormControl ? 1 : 0,
-        reasonWrongAnswer: {
-          id: reasonWrongAnswer?.id ?? undefined,
-          reason: value.answerFormArray[i].reasonFormControl,
-        },
+        reasonWrong: value.answerFormArray[i].reasonFormControl,
       })),
     };
 

@@ -1,13 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { QuestionEntity } from './question.entity';
-import { ReasonWrongAnswerEntity } from './reason-wrong-answer.entity';
-import { Type } from 'class-transformer';
 
 @Entity('answers')
 export class AnswerEntity {
@@ -20,14 +12,9 @@ export class AnswerEntity {
   @Column()
   isCorrect: number;
 
+  @Column()
+  reasonWrong: string;
+
   @ManyToOne(() => QuestionEntity, (question) => question.answers)
   question: QuestionEntity;
-
-  @Type(() => ReasonWrongAnswerEntity)
-  @OneToOne(
-    () => ReasonWrongAnswerEntity,
-    (reasonWrongAnswer) => reasonWrongAnswer.answer,
-    { cascade: true, onDelete: 'CASCADE' },
-  )
-  reasonWrongAnswer: ReasonWrongAnswerEntity;
 }

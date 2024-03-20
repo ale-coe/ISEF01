@@ -340,10 +340,7 @@ const initDb = async () => {
           `CREATE TABLE questions (id INTEGER PRIMARY KEY, question TEXT, inEdit INTEGER);`,
         );
         db.run(
-          `CREATE TABLE answers (id INTEGER PRIMARY KEY, questionId INTEGER, answer TEXT, isCorrect INTEGER, CONSTRAINT fk_question FOREIGN KEY(questionId) REFERENCES questions(id) ON DELETE CASCADE);`,
-        );
-        db.run(
-          `CREATE TABLE reasonWrongAnswer (id INTEGER PRIMARY KEY, answerId INTEGER, reason TEXT, CONSTRAINT fk_answer FOREIGN KEY(answerId) REFERENCES answers(id) ON DELETE CASCADE);`,
+          `CREATE TABLE answers (id INTEGER PRIMARY KEY, questionId INTEGER, answer TEXT, isCorrect INTEGER, reasonWrong TEXT DEFAULT '', CONSTRAINT fk_question FOREIGN KEY(questionId) REFERENCES questions(id) ON DELETE CASCADE);`,
         );
 
         const mapUsers = users.map(

@@ -4,18 +4,19 @@
   justify-content: center;
   align-items: center;
 
-  .title {
-    margin-bottom: 60px;
-    text-align: center;
-  }
-
   .mat-mdc-card-content {
     padding: 50px;
+
+    .logo {
+      width: 400px;
+      height: auto;
+    }
 
     .login-inputs {
       display: flex;
       justify-content: stretch;
       flex-direction: column;
+      margin-top: 60px;
     }
 
     .login-btn {
