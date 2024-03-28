@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/common/services/auth.service';
 export class LoginComponent {
   loggingIn = false;
   formGroup = new FormGroup({
-    username: new FormControl('test1@mail.de', {
+    username: new FormControl('', {
       validators: [Validators.required],
     }),
     password: new FormControl('', { validators: [Validators.required] }),
